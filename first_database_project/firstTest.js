@@ -13,14 +13,17 @@ async function testA() {
     user: "zeke",
     password: "1234",
     database: "employeeDB",
+    // If 'ER_CANNOT_RETRIEVE_RSA_KEY' try this:
+    // allowPublicKeyRetrieval: true,
   };
   const connection = await mariadb.createConnection(options);
 
+  console.log("------------------------- test1 ------------------------");
   let result = await connection.query("select * from employee");
 
   delete result.meta;
-  console.log(result);
-  console.log(Object.entries(result[0]));
+  // console.log(result);
+  // console.log(Object.entries(result[0]));
   console.log(result.map((item) => Object.values(item)));
 
   console.log("------------------------- test2 ------------------------");
@@ -28,6 +31,12 @@ async function testA() {
     rowsAsArray: true,
     sql: "select * from employee",
   });
+  delete result.meta;
+  console.log(result);
+
+  console.log("------------------------- test3 ------------------------");
+  /* Question marks as placeholders, then an array with values to replace question marks */
+  result = await connection.query("select * from employee where id=?", [1]);
   delete result.meta;
   console.log(result);
 
