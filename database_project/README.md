@@ -44,3 +44,26 @@ Select queries will result a Javascript object:
 ```
 
 For example an insert statement will return an object:
+
+```js
+const result = await db.doQuery("insert into employee values(?,?,?,?,?)", [
+  123,
+  "Vera",
+  "River",
+  "ICT",
+  6000,
+]);
+```
+
+The statement to be sent to database engine will be:
+
+insert into employee values(123, "Vera", "River", "ICT", 6000);
+
+will return an object:
+
+```js
+{
+    queryResult: { rowsChanged: 1, insertId: 0, status:0 },
+    resultSet: false
+}
+```
