@@ -26,7 +26,7 @@ const result = await db.doQuery("select * from employee");
 const result = await db.doQuery("select * from employee where id=?", [1]);
 ```
 
-Select queries will result a Javascript object:
+Select queries will result a promise with a result as Javascript object:
 
 ```js
 {
@@ -59,7 +59,7 @@ The statement to be sent to database engine will be:
 
 insert into employee values(123, "Vera", "River", "ICT", 6000);
 
-will return an object:
+Will return a promise with a result as an object:
 
 ```js
 {
@@ -67,3 +67,5 @@ will return an object:
     resultSet: false
 }
 ```
+
+In error case it rejects error-string
