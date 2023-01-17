@@ -13,7 +13,7 @@ async function testA() {
     user: "zeke",
     password: "1234",
     database: "employeeDB",
-    // If 'ER_CANNOT_RETRIEVE_RSA_KEY' try this:
+    // If getting 'ER_CANNOT_RETRIEVE_RSA_KEY' error, try this:
     // allowPublicKeyRetrieval: true,
   };
   const connection = await mariadb.createConnection(options);
