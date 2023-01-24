@@ -12,13 +12,20 @@ const options = {
 
 const db = new Database(options);
 
-run();
+function printWorkers(employees) {
+  for (const person of employees) {
+    console.log(
+      `${person.id}:  ${person.firstname} ${person.lastname}` +
+        `   |   Dept: ${person.department},    salary: ${person.salary}`
+    );
+  }
+}
 
 async function getAll() {
   try {
     const result = await db.doQuery("select * from employee");
     if (result.resultSet) {
-      console.log(result.queryResult);
+      printWorkers(result.queryResult);
     }
   } catch (err) {
     console.log(err);
@@ -28,5 +35,6 @@ async function getAll() {
 // Main function
 async function run() {
   await getAll();
-  await getAll();
 }
+
+run();
