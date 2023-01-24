@@ -2,6 +2,7 @@
 
 const Database = require("./database");
 const options = require("./databaseOptions.json");
+const { insertParameters, updateParameters } = require("./parameterFunctions");
 
 const sql = require("./sqlStatements.json");
 
@@ -13,26 +14,6 @@ const removeSql = sql.remove.join(" ");
 const PRIMARY_KEY = sql.primaryKey;
 
 const { CODES, MESSAGES } = require("./statusCodes");
-
-function insertParameters(employee) {
-  return [
-    employee.id,
-    employee.firstname,
-    employee.lastname,
-    employee.department,
-    employee.salary,
-  ];
-}
-
-function updateParameters(employee) {
-  return [
-    employee.firstname,
-    employee.lastname,
-    employee.department,
-    employee.salary,
-    employee.id,
-  ];
-}
 
 // Datastorage class
 
