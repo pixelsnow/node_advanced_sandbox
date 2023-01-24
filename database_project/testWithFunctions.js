@@ -42,13 +42,77 @@ async function getOne(id) {
   }
 }
 
+async function add(employee) {
+  try {
+    // Array of parameters that will be passed as a second argument
+    const parameters = [
+      employee.id,
+      employee.firstname,
+      employee.lastname,
+      employee.department,
+      employee.salary,
+    ];
+    // If order was different we woukd need to add (id, firstname, lastname, department, salary)
+    const sql = "insert into employee values (?,?,?,?,?)";
+    const status = await db.doQuery(sql, parameters);
+    console.log(status);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function remove(id) {
+  try {
+    const status = await db.doQuery("delete from employee where id=?", [id]);
+    console.log(status);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function update(modifiedEmployee) {
+  try {
+    const sql =
+      "update employee set firstname=?, lastname=?, department=?, salary=? where id=?";
+    const parameters = [
+      modifiedEmployee.firstname,
+      modifiedEmployee.lastname,
+      modifiedEmployee.department,
+      modifiedEmployee.salary,
+      modifiedEmployee.id,
+    ];
+    const status = await db.doQuery(sql, parameters);
+    console.log(status);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Main function
 async function run() {
-  console.log("------------------------- getAll ------------------------");
-  await getAll();
-
   console.log("------------------------- getOne ------------------------");
   await getOne(2);
+  console.log("------------------------- remove ------------------------");
+  await remove(200);
+  await remove(201);
+  console.log("------------------------- add ------------------------");
+  await add({
+    id: 200,
+    firstname: "Mike",
+    lastname: "Jones",
+    department: "maintenance",
+    salary: 4000,
+  });
+  console.log("------------------------- update ------------------------");
+  await update({
+    id: 200,
+    firstname: "Mike",
+    lastname: "Jones",
+    department: "admin",
+    salary: 4500,
+  });
+  console.log("------------------------- getAll ------------------------");
+  await getAll();
 }
 
 run();
