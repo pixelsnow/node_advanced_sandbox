@@ -1,0 +1,56 @@
+* {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+main,
+form {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+input[readonly] {
+  background-color: lightgray;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding: 0.5em;
+}
+
+thead {
+  background-color: antiquewhite;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  width: 13em;
+  height: 2em;
+}
+
+p.error {
+  border: 2px dashed coral;
+  padding: 1em;
+}
+
+p.info {
+  border: 2px solid lightseagreen;
+  padding: 1em;
+}
+
+h1.error {
+  color: coral;
+}
+
+.legend{
+    color: #8781ff;
+}

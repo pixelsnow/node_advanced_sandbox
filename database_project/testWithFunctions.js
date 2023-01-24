@@ -72,6 +72,7 @@ async function remove(id) {
 
 async function update(modifiedEmployee) {
   try {
+    console.log(Object.values(modifiedEmployee));
     const sql =
       "update employee set firstname=?, lastname=?, department=?, salary=? where id=?";
     const parameters = [
