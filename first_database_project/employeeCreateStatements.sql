@@ -17,7 +17,10 @@ insert into employee values(1, 'Matt', 'River', 'ICT', 5000);
 insert into employee (id, firstname, lastname, department, salary)
 values(2, 'Mary', 'Jones', 'admin', 7000);
 
+/* This version would erase the user fully which can be dangerous:
 drop user if exists 'zeke'@'localhost';
-create user 'zeke'@'localhost' identified by "1234";
+create user 'zeke'@'localhost' identified by "1234"; */
+
+create user if not exists 'zeke'@'localhost' identified by "1234";
 
 grant all privileges on employeeDB.* to 'zeke'@'localhost';

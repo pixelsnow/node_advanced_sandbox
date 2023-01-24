@@ -16,9 +16,12 @@ async function testA() {
     // If getting 'ER_CANNOT_RETRIEVE_RSA_KEY' error, try this:
     // allowPublicKeyRetrieval: true,
   };
+
+  // Opens the connection to the database, returns Promise
   const connection = await mariadb.createConnection(options);
 
   console.log("------------------------- test1 ------------------------");
+  // Sends a statement to a database, database needs to be started by now
   let result = await connection.query("select * from employee");
 
   delete result.meta;
@@ -35,7 +38,7 @@ async function testA() {
   console.log(result);
 
   console.log("------------------------- test3 ------------------------");
-  /* Question marks as placeholders, then an array with values to replace question marks */
+  /* Question marks as placeholders, then passing an array with values to replace question marks */
   result = await connection.query("select * from employee where id=?", [1]);
   delete result.meta;
   console.log(result);
