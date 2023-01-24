@@ -33,6 +33,7 @@ app.get("/all", (req, res) =>
   dataStorage
     .getAll()
     .then((data) => res.render("allPersons", { result: data }))
+    .catch((error) => sendErrorPage(res, error))
 );
 
 // Adding one more rule
