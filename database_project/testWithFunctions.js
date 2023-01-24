@@ -15,8 +15,8 @@ const db = new Database(options);
 function printWorkers(employees) {
   for (const person of employees) {
     console.log(
-      `${person.id}:\t${person.firstname} ${person.lastname}` +
-        `\t|\tDept: ${person.department},\tsalary: ${person.salary}`
+      `${person.id}\t|\t${person.firstname} ${person.lastname}` +
+        `\t|\tDept: ${person.department}\t|\tSalary: ${person.salary}`
     );
   }
 }
@@ -35,7 +35,8 @@ async function getAll() {
 async function getOne(id) {
   try {
     const result = await db.doQuery("select * from employee where id=?", [id]);
-    printWorkers(result.queryResult);
+    if (result.queryResult.length > 0) printWorkers(result.queryResult);
+    else console.log(`No employee found with id=${id}`);
   } catch (err) {
     console.log(err);
   }
