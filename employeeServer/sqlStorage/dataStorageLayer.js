@@ -42,15 +42,14 @@ module.exports = class DataStorage {
       try {
         if (!id) {
           reject(MESSAGES.NOT_FOUND("---empty---"));
-        } else {
-          const result = await this.db.doQuery(getOneSql, [id]);
-          if (result.queryResult.length > 0) {
-            // this goes to then
-            resolve(result.queryResult[0]);
-          }
-          // this goes to catch
-          reject(MESSAGES.NOT_FOUND(id));
         }
+        const result = await this.db.doQuery(getOneSql, [id]);
+        if (result.queryResult.length > 0) {
+          // this goes to then
+          resolve(result.queryResult[0]);
+        }
+        // this goes to catch
+        reject(MESSAGES.NOT_FOUND(id));
       } catch (err) {
         reject(MESSAGES.PROGRAM_ERROR());
       }
