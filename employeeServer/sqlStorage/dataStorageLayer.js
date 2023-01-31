@@ -47,10 +47,9 @@ module.exports = class DataStorage {
           if (result.queryResult.length > 0) {
             // this goes to then
             resolve(result.queryResult[0]);
-          } else {
-            // this goes to catch
-            reject(MESSAGES.NOT_FOUND(id));
           }
+          // this goes to catch
+          reject(MESSAGES.NOT_FOUND(id));
         }
       } catch (err) {
         reject(MESSAGES.PROGRAM_ERROR());
