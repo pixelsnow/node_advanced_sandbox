@@ -53,6 +53,11 @@ const MESSAGES = {
     code: CODES.NOT_REMOVED,
     type: "error",
   }),
+  KEY_NO_NOT_MATCH: (key, keyInResource) => ({
+    message: `The key ${key} of given resource doesn't match the given key ${keyInResource}`,
+    code: CODES.KEY_NO_NOT_MATCH,
+    type: "error",
+  }),
 };
 
 module.exports = { CODES, MESSAGES };
