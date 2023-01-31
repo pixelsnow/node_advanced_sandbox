@@ -61,6 +61,27 @@ async function createDb(createStatements, adminPass) {
 
     for (let table of createStatements.tables) {
       if (table.columns && table.columns.length > 0) {
+        const createTableSql =
+          `create table ${createStatements.database}.${table.tableName} (` +
+          `\n\t${table.columns.join(",\n\t")}` +
+          `\n)`;
+        await db.doQuery(createTableSql);
+        if (DEBUG) printStatement(createTableSql);
+        if (table.data && table.data.length > 0) {
+          const rows = [];
+          for (const data of table.data) {
+            const insertRowSql =
+              `insert into ${createStatements.database}.${table.tableName} ` +
+              `values(${Array(data.length).fill("?").join(", ")})`;
+            if (DEBUG) printStatement(insertRowSql + "\t" + data.join(", "));
+            rows.push(db.doQuery(insertRowSql, data));
+          }
+          // Waiting for all rows to be inserted
+          await Promise.all(rows);
+          if (DEBUG) printMessage("Data added");
+        } else {
+          if (DEBUG) printMessage("Data missing.");
+        }
       } else {
         if (DEBUG)
           printMessage("Table columns missing. Table was not created.");
