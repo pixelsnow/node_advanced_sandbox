@@ -3,7 +3,7 @@
   "port": 3306,
   "admin": "admin",
   "user": "jane",
-  "userpassword": "secret",
+  "userPassword": "secret",
   "dropUser": true,
   "debug": true,
   "database": "employeeDB2",

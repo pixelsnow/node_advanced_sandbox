@@ -12,7 +12,7 @@ const printError = (message) =>
   );
 
 let createStatementFile = "./createStatements.json";
-let adminPass = "";
+let adminPass = "adminpass";
 
 if (process.argv.length > 2) {
   adminPass = process.argv[2];
@@ -22,7 +22,7 @@ if (process.argv.length > 2) {
 }
 
 try {
-  console.log(require(createStatementFile));
+  createDb(require(createStatementFile), adminPass);
 } catch (err) {
   printError(err.message);
 }
@@ -39,4 +39,34 @@ async function createDb(createStatements, adminPass) {
 
   // 'jane'@'localhost'
   const user = `'${createStatements.user}'@'${createStatements.host}'`;
+  const dropDatabaseSql = `drop database if exists ${createStatements.database}`;
+  const createDatabaseSql = `create database ${createStatements.database}`;
+  const dropUserSql = `drop user if exists ${user}`;
+  const createUserSql = `create user if not exists ${user} identified by '${createStatements.userPassword}'`;
+  const grantPrivilegesSql = `grant all privileges on ${createStatements.database}.* to ${user}`;
+
+  try {
+    await db.doQuery(dropDatabaseSql);
+    if (DEBUG) printStatement(dropDatabaseSql);
+    await db.doQuery(createDatabaseSql);
+    if (DEBUG) printStatement(createDatabaseSql);
+    if (createStatements.dropUser) {
+      await db.doQuery(dropUserSql);
+      if (DEBUG) printStatement(dropUserSql);
+    }
+    await db.doQuery(createUserSql);
+    if (DEBUG) printStatement(createUserSql);
+    await db.doQuery(grantPrivilegesSql);
+    if (DEBUG) printStatement(grantPrivilegesSql);
+
+    for (let table of createStatements.tables) {
+      if (table.columns && table.columns.length > 0) {
+      } else {
+        if (DEBUG)
+          printMessage("Table columns missing. Table was not created.");
+      }
+    }
+  } catch (err) {
+    printError(err);
+  }
 }
