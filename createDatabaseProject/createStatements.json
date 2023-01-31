@@ -23,7 +23,6 @@
         [3, "Vera", "Jones", null, null]
       ]
     },
-
     {
       "tableName": "person",
       "columns": [
