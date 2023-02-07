@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <main>
+      <h1>REST tester</h1>
+      <p id="uri">
+        <label>Resource URI: <input type="text" id="urifield" /> </label>
+      </p>
+      <fieldset id="methods">
+        <legend>Choose</legend>
+        <label><input type="radio" name="method" value="GET" />GET</label>
+        <label><input type="radio" name="method" value="POST" />POST</label>
+        <label><input type="radio" name="method" value="PUT" />PUT</label>
+        <label><input type="radio" name="method" value="DELETE" />DELETE</label>
+      </fieldset>
+      <h2>JSON</h2>
+      <div>
+        <textarea id="jsonarea" cols="50" rows="10"></textarea>
+      </div>
+      <button id="submit">Submit</button>
+      <h2>Result</h2>
+      <pre id="messagearea"></pre>
+    </main>
+  </body>
+</html>

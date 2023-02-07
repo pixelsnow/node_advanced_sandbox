@@ -14,10 +14,109 @@ const insertSql = sql.insert.join(" ");
 const updateSql = sql.update.join(" ");
 const removeSql = sql.remove.join(" ");
 
-const primaryKey = sql.primaryKey;
+const PRIMARY_KEY = sql.primaryKey;
 
-console.log(getAllSql);
-console.log(getSql);
-console.log(insertSql);
-console.log(updateSql);
-console.log(removeSql);
+module.exports = class DataStorage {
+  constructor() {
+    this.db = new Database(options);
+  }
+
+  get CODES() {
+    return CODES;
+  }
+
+  get resource() {
+    return sql.resourse;
+  }
+
+  getAll() {
+    console.log("hi");
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.db.doQuery(getAllSql);
+        console.log(result);
+        resolve(result.queryResult);
+      } catch (err) {
+        console.log(err);
+        reject(MESSAGES.PROGRAM_ERROR());
+      }
+    });
+  }
+
+  get(key) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.bd.doQuery(getSql, [key]);
+        if (result.queryResult.length > 0) {
+          resolve(result.queryResult);
+        } else {
+          resolve(MESSAGES.NOT_FOUND(PRIMARY_KEY, key));
+        }
+      } catch (err) {
+        console.log(err);
+        reject(MESSAGES.PROGRAM_ERROR());
+      }
+    });
+  }
+
+  insert(resourceObject) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.db.doQuery(insertSql, toInsertArray(resourceObject));
+        resolve(MESSAGES.INSERT_OK(PRIMARY_KEY, resourceObject[PRIMARY_KEY]));
+      } catch (err) {
+        console.log(err);
+        reject(MESSAGES.NOT_INSERTED());
+      }
+    });
+  }
+
+  update(key, resourceObject) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (key && resourceObject) {
+          if (resourceObject[PRIMARY_KEY] !== key) {
+            reject(MESSAGES.KEY_NO_NOT_MATCH(PRIMARY_KEY, key));
+          }
+          const resultGet = await this.db.doQuery(getSql, key);
+          if (resultGet.queryResult.length > 0) {
+            const result = await this.db.doQuery(
+              updateSql,
+              toUpdateArray(resourceObject)
+            );
+            if (result.queryResult.rowsChanged === 0) {
+              resolve(MESSAGES.NOT_UPDATED(PRIMARY_KEY, key));
+            } else {
+              resolve(MESSAGES.UPDATE_OK(PRIMARY_KEY, key));
+            }
+          } else {
+            this.insert(resourceObject)
+              .then((status) => resolve(status))
+              .catch((err) => reject(err));
+          }
+        } else {
+          resolve(MESSAGES.NOT_UPDATED());
+        }
+      } catch (err) {
+        console.log(err);
+        reject(MESSAGES.PROGRAM_ERROR());
+      }
+    });
+  }
+
+  remove(key) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.db.doQuery(removeSql, [key]);
+        if (result.queryResult.rowsChanged === 0) {
+          resolve(MESSAGES.NOT_REMOVED(PRIMARY_KEY, key));
+        } else {
+          resolve(MESSAGES.REMOVE_OK(PRIMARY_KEY, key));
+        }
+      } catch (err) {
+        console.log(err);
+        reject(MESSAGES.PROGRAM_ERROR());
+      }
+    });
+  }
+};
