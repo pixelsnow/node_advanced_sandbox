@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Document</title>
-    <style></style>
+    <style>
+      input[id="urifield"] {
+        width: 500px;
+      }
+    </style>
+    <script src="tester.js"></script>
   </head>
   <body>
     <main>
@@ -13,7 +18,9 @@
       </p>
       <fieldset id="methods">
         <legend>Choose</legend>
-        <label><input type="radio" name="method" value="GET" />GET</label>
+        <label
+          ><input type="radio" name="method" value="GET" id="get" />GET</label
+        >
         <label><input type="radio" name="method" value="POST" />POST</label>
         <label><input type="radio" name="method" value="PUT" />PUT</label>
         <label><input type="radio" name="method" value="DELETE" />DELETE</label>
