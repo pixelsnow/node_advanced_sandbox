@@ -47,6 +47,8 @@ app.post(`/api/${RESOURCE}`, (req, res) =>
 app.put(`/api/${RESOURCE}/:key`, (req, res) => {
   const resourceObject = req.body;
   const key = req.params.key;
+  console.log(resourceObject);
+  console.log(key);
   storage
     .update(key, resourceObject)
     .then((result) => res.json(result))

@@ -46,7 +46,7 @@ module.exports = class DataStorage {
   get(key) {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.bd.doQuery(getSql, [key]);
+        const result = await this.db.doQuery(getSql, [key]);
         if (result.queryResult.length > 0) {
           resolve(result.queryResult);
         } else {
