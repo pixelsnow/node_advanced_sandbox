@@ -107,7 +107,9 @@ module.exports = class DataStorage {
   remove(key) {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log("datalayer removal");
         const result = await this.db.doQuery(removeSql, [key]);
+        console.log(result);
         if (result.queryResult.rowsChanged === 0) {
           resolve(MESSAGES.NOT_REMOVED(PRIMARY_KEY, key));
         } else {

@@ -25,6 +25,7 @@
         options
       );
       const status = await result.json();
+      console.log(status);
       if (status.message) {
         updateMessage(status.message, status.type);
       }
