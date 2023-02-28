@@ -60,13 +60,15 @@
           mode: "cors",
         };
         const data = await fetch(
-          `http://localhost:4000/api/computers/`,
+          `http://localhost:4000/api/computers/${computer.id}`,
           options
         );
         const status = await data.json();
         if (status.message) {
           updateMessage(status.message, status.type);
         }
+        searchState = true;
+        updateFields();
       }
     } catch (err) {
       updateMessage(`Computer not updated. ${err.message}`, "error");

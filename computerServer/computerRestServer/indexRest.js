@@ -23,7 +23,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get(`/api/${RESOURCE}`, (req, res) => {
-  console.log("indexRest get all");
   storage
     .getAll()
     .then((result) => res.json(result))
@@ -31,7 +30,6 @@ app.get(`/api/${RESOURCE}`, (req, res) => {
 });
 
 app.get(`/api/${RESOURCE}/:key`, (req, res) => {
-  console.log("indexRest get one");
   storage
     .get(req.params.key)
     .then((result) => res.json(result))
@@ -40,7 +38,6 @@ app.get(`/api/${RESOURCE}/:key`, (req, res) => {
 
 // Request body will be here because of app.use(express.json()) middleware
 app.post(`/api/${RESOURCE}`, (req, res) => {
-  console.log("indexRest post?");
   storage
     .insert(req.body)
     .then((result) => res.json(result))
@@ -48,7 +45,6 @@ app.post(`/api/${RESOURCE}`, (req, res) => {
 });
 
 app.put(`/api/${RESOURCE}/:key`, (req, res) => {
-  console.log("indexRest update");
   const resourceObject = req.body;
   const key = req.params.key;
   console.log(resourceObject);
@@ -60,9 +56,8 @@ app.put(`/api/${RESOURCE}/:key`, (req, res) => {
 });
 
 app.delete(`/api/${RESOURCE}/:key`, (req, res) => {
-  console.log("indexRest delete");
   storage
-    .get(req.params.key)
+    .remove(req.params.key)
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });

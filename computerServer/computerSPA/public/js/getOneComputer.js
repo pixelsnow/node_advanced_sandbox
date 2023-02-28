@@ -19,6 +19,7 @@
     resultarea.innerHTML = "";
     try {
       const id = computerid.value.trim();
+      console.log("id is ", id, id.length);
       if (id.length === 0) return;
       const data = await fetch(`http://localhost:4000/api/computers/${id}`, {
         mode: "cors",
@@ -33,6 +34,7 @@
       }
       console.log(result);
     } catch (err) {
+      console.log(err);
       updateMessage(`Not found. ${err.message}`, "error");
     }
   }
@@ -48,7 +50,7 @@
   }
 
   function updateResult(result) {
-    if (result.length === 0) return;
+    if (!result.length) return;
     const computer = result[0];
     resultarea.innerHTML = `
     <p><span class="legend">ID </span>${computer.id}</p>

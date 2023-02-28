@@ -30,14 +30,11 @@ module.exports = class DataStorage {
   }
 
   getAll() {
-    console.log("hi");
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.db.doQuery(getAllSql);
-        console.log(result);
         resolve(result.queryResult);
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });
@@ -53,7 +50,6 @@ module.exports = class DataStorage {
           resolve(MESSAGES.NOT_FOUND(PRIMARY_KEY, key));
         }
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });
@@ -65,7 +61,6 @@ module.exports = class DataStorage {
         await this.db.doQuery(insertSql, toInsertArray(resourceObject));
         resolve(MESSAGES.INSERT_OK(PRIMARY_KEY, resourceObject[PRIMARY_KEY]));
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.NOT_INSERTED());
       }
     });
@@ -75,8 +70,8 @@ module.exports = class DataStorage {
     return new Promise(async (resolve, reject) => {
       try {
         if (key && resourceObject) {
-          if (resourceObject[PRIMARY_KEY] !== key) {
-            reject(MESSAGES.KEY_NO_NOT_MATCH(PRIMARY_KEY, key));
+          if (resourceObject[PRIMARY_KEY] !== +key) {
+            reject(MESSAGES.KEY_NO_NOT_MATCH(resourceObject[PRIMARY_KEY], key));
           }
           const resultGet = await this.db.doQuery(getSql, key);
           if (resultGet.queryResult.length > 0) {
@@ -98,7 +93,6 @@ module.exports = class DataStorage {
           resolve(MESSAGES.NOT_UPDATED());
         }
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });
@@ -107,16 +101,13 @@ module.exports = class DataStorage {
   remove(key) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("datalayer removal");
         const result = await this.db.doQuery(removeSql, [key]);
-        console.log(result);
         if (result.queryResult.rowsChanged === 0) {
           resolve(MESSAGES.NOT_REMOVED(PRIMARY_KEY, key));
         } else {
           resolve(MESSAGES.REMOVE_OK(PRIMARY_KEY, key));
         }
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });
