@@ -108,6 +108,7 @@ module.exports = class DataStorage {
           resolve(MESSAGES.REMOVE_OK(PRIMARY_KEY, key));
         }
       } catch (err) {
+        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });

@@ -119,7 +119,7 @@
   }
 
   function updateComputer(result) {
-    if (result.length === 0) return;
+    if (!result.length) return;
     const computer = result[0];
     idField.value = computer.id;
     nameField.value = computer.name;
