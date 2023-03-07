@@ -49,7 +49,7 @@ const MESSAGES = {
     type: "info",
   }),
   NOT_REMOVED: (key, value) => ({
-    message: `No employee found with ${key} ${value}. Nothing removed`,
+    message: `No resource found with ${key} ${value}. Nothing removed`,
     code: CODES.NOT_REMOVED,
     type: "error",
   }),
