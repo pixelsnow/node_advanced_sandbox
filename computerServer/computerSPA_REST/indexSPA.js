@@ -4,7 +4,11 @@ const path = require("path");
 const express = require("express");
 const app = express();
 
-const fetch = require("node-fetch");
+// We need something here to fetch the data, and Node has no fetch operation,
+// so we need to write it ourselves or use some library
+
+// const fetch = require("node-fetch"); // npm install node-fetch@2
+const fetch = require("./fetchlib");
 
 const { port, host } = require("./config.json");
 
@@ -15,8 +19,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "menu.html")));
 
-// We need something here to fetch the data, and Node has no fetch operation,
-// so we need to write it ourselves or use some library
 app.get("/getAll", (req, res) => {
   fetch("http://127.0.0.1:4000/api/computers")
     .then((data) => data.json())
