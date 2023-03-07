@@ -1,0 +1,67 @@
+h1 {
+  color: coral;
+}
+
+.legend {
+  color: rgb(80, 64, 197);
+  font-weight: bold;
+}
+
+main {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+thead {
+  background-color: lightblue;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background-color: #333;
+  color: white;
+  width: 13rem;
+  height: 2rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.info {
+  border: 3px solid lightgreen;
+  padding: 1rem;
+}
+
+.error {
+  border: 3px dashed coral;
+  padding: 1rem;
+}
+
+#messagearea {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+input[readonly] {
+  background-color: #ddd;
+}
