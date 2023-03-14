@@ -1,3 +1,5 @@
+import { updateMessage, clearMessage } from "/js/helperFunctions.js";
+
 let idField, nameField, typeField, processorField, amountField, messagearea;
 let searchState = true;
 
@@ -19,7 +21,7 @@ function init() {
 }
 
 async function send() {
-  clearMessage();
+  clearMessage(messagearea);
 
   try {
     if (searchState) {
@@ -31,7 +33,7 @@ async function send() {
       if (result) {
         if (result.message) {
           // This means error
-          updateMessage(result.message, result.type);
+          updateMessage(messagearea, result.message, result.type);
         }
         updateComputer(result);
       }
@@ -56,30 +58,20 @@ async function send() {
       const data = await fetch(`/update`, options);
       const status = await data.json();
       if (status.message) {
-        updateMessage(status.message, status.type);
+        updateMessage(messagearea, status.message, status.type);
       }
       searchState = true;
       updateFields();
     }
   } catch (err) {
-    updateMessage(`Computer not updated. ${err.message}`, "error");
+    updateMessage(messagearea, `Computer not updated. ${err.message}`, "error");
   }
-}
-
-function updateMessage(message, type) {
-  messagearea.textContent = message;
-  messagearea.setAttribute("class", type);
-}
-
-function clearMessage() {
-  messagearea.textContent = "";
-  messagearea.removeAttribute("class");
 }
 
 function clearAll() {
   if (searchState) {
     clearFieldValues();
-    clearMessage();
+    clearMessage(messagearea);
   }
 }
 

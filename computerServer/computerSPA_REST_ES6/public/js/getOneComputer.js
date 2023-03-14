@@ -1,6 +1,6 @@
-let resultarea;
-let messagearea;
-let computerid;
+import { updateMessage, clearMessage } from "/js/helperFunctions.js";
+
+let resultarea, messagearea, computerid;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -12,7 +12,7 @@ function init() {
 }
 
 async function send() {
-  clearMessage();
+  clearMessage(messagearea);
   resultarea.innerHTML = "";
   try {
     const id = computerid.value.trim();
@@ -23,25 +23,15 @@ async function send() {
     if (result) {
       if (result.message) {
         // This means error
-        updateMessage(result.message, result.type);
+        updateMessage(messagearea, result.message, result.type);
       }
       updateResult(result);
     }
     console.log(result);
   } catch (err) {
     console.log(err);
-    updateMessage(`Not found. ${err.message}`, "error");
+    updateMessage(messagearea, `Not found. ${err.message}`, "error");
   }
-}
-
-function updateMessage(message, type) {
-  messagearea.textContent = message;
-  messagearea.setAttribute("class", type);
-}
-
-function clearMessage() {
-  messagearea.textContent = "";
-  messagearea.removeAttribute("class");
 }
 
 function updateResult(result) {

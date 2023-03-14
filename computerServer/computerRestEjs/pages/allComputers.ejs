@@ -1,0 +1,25 @@
+<%- include('head') %>
+    <% if(data.length > 0){ %>
+        <table>
+            <thead>
+                <tr>
+                    <% Object.keys(data[0]).forEach(field => { %>
+                        <th><%= field %></th>
+                    <% }) %>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(item => { %>
+                    <tr>
+                        <% Object.values(item).forEach(value => { %>
+                            <td><%= value %></td>
+                        <% }) %>
+                    </tr>
+                <% }) %>
+                
+            </tbody>
+        </table>
+    <% } else { %>
+        <h2>No items found</h2>
+    <% } %>
+<%- include('tail') %>

@@ -1,3 +1,5 @@
+import { updateMessage, clearMessage } from "/js/helperFunctions.js";
+
 let inputField, messagearea;
 
 document.addEventListener("DOMContentLoaded", init);
@@ -9,7 +11,7 @@ function init() {
 }
 
 async function send() {
-  clearMessage();
+  clearMessage(messagearea);
   const id = inputField.value;
   try {
     console.log("trying");
@@ -22,23 +24,14 @@ async function send() {
     const status = await result.json();
     console.log(status);
     if (status.message) {
-      updateMessage(status.message, status.type);
+      updateMessage(messagearea, status.message, status.type);
     }
   } catch (err) {
     console.log(err);
     updateMessage(
+      messagearea,
       `Computer with id ${id} was not deleted. ${err.message}`,
       "error"
     );
   }
-}
-
-function updateMessage(message, type) {
-  messagearea.textContent = message;
-  messagearea.setAttribute("class", type);
-}
-
-function clearMessage() {
-  messagearea.textContent = "";
-  messagearea.removeAttribute("class");
 }

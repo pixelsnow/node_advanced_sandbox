@@ -1,3 +1,5 @@
+import { updateMessage, clearMessage } from "/js/helperFunctions.js";
+
 let idField, nameField, typeField, processorField, amountField, messagearea;
 
 document.addEventListener("DOMContentLoaded", init);
@@ -13,7 +15,7 @@ function init() {
 }
 
 async function send() {
-  clearMessage();
+  clearMessage(messagearea);
   const computer = {
     id: +idField.value,
     name: nameField.value,
@@ -32,19 +34,9 @@ async function send() {
     const data = await fetch(`/add`, options);
     const status = await data.json();
     if (status.message) {
-      updateMessage(status.message, status.type);
+      updateMessage(messagearea, status.message, status.type);
     }
   } catch (err) {
-    updateMessage(`Computer not added. ${err.message}`, "error");
+    updateMessage(messagearea, `Computer not added. ${err.message}`, "error");
   }
-}
-
-function updateMessage(message, type) {
-  messagearea.textContent = message;
-  messagearea.setAttribute("class", type);
-}
-
-function clearMessage() {
-  messagearea.textContent = "";
-  messagearea.removeAttribute("class");
 }
