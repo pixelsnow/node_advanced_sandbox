@@ -2,7 +2,6 @@
   "host": "localhost",
   "port": 3306,
   "admin": "admin",
-  "adminPassword": "adminpass",
   "user": "isla",
   "userPassword": "SDVjbSjj",
   "socketPath": "/tmp/mysql.sock",
@@ -22,7 +21,12 @@
       ],
       "data": [
         [1, "NexGen 2", "1995", "toaster", 700],
-        [2, "Mercury", "2015", "radio", 300]
+        [2, "Mercury", "2015", "radio", 300],
+        [3, "MaxEffect 2000", "2010", "stereo", 100],
+        [4, "Beast II", "1990", "tv", 200],
+        [5, "Cosmos", "2018", "phone", 1500],
+        [6, "Future 2025", "2012", "monitor", 2000],
+        [7, "Tako delux", "2017", "moccamaster", 499]
       ]
     }
   ]

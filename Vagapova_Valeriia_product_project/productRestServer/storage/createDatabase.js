@@ -3,6 +3,7 @@
 const Database = require("./database");
 
 let createStatementFile = "./Vagapova_Valeriia_product_createStatements.json";
+let adminPass = "adminpass";
 
 const printMessage = (message) => console.log(message);
 const printStatement = (statement) => printMessage(statement + ";");
@@ -31,7 +32,7 @@ async function createDb(createStatements, adminPass) {
     host: createStatements.host,
     port: createStatements.port,
     user: createStatements.admin,
-    password: createStatements.adminPassword,
+    password: adminPass,
     socketPath: createStatements.socketPath,
     allowPublicKeyRetrieval: createStatements.allowPublicKeyRetrieval,
   };
