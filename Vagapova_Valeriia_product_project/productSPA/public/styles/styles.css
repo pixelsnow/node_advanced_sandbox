@@ -1,5 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
 h1 {
   color: coral;
+  margin: 1rem;
 }
 
 .legend {
@@ -42,6 +54,10 @@ button {
   cursor: pointer;
 }
 
+button[type="submit"] {
+  background-color: #30977d;
+}
+
 .info {
   border: 3px solid lightgreen;
   padding: 1rem;
@@ -60,6 +76,10 @@ button {
 input {
   border: 1px solid #333;
   border-radius: 4px;
+  padding: 0.3rem;
+  margin: 0.3rem 0;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 input[readonly] {
