@@ -12,7 +12,7 @@
       const resultset = document.getElementById("resultset");
       for (const product of products) {
         const tr = document.createElement("tr");
-        tr.appendChild(createCell(product.id));
+        tr.appendChild(createCell(product.productId));
         tr.appendChild(createCell(product.name));
         tr.appendChild(createCell(product.model));
         tr.appendChild(createCell(product.type));

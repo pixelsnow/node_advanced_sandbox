@@ -24,6 +24,7 @@ app.use(express.json());
 // CONFIGURING ENDPOINTS
 
 app.get(`/api/${RESOURCE}`, (req, res) => {
+  console.log("app.get");
   storage
     .getAll()
     .then((result) => res.json(result))

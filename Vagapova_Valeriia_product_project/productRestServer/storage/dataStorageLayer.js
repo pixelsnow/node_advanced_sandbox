@@ -39,6 +39,7 @@ module.exports = class DataStorage {
         console.log("result", result);
         resolve(result.queryResult);
       } catch (err) {
+        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });

@@ -17,7 +17,7 @@ module.exports = class Database {
         if (typeof queryResult === "undefined") {
           reject("QueryError");
         } else if (typeof queryResult.affectedRows === "undefined") {
-          delete queryResult.meta;
+          //delete queryResult.meta;
           // here it could be queryResult:queryResult, but this is a shorter version
           resolve({ queryResult, resultSet: true });
         } else {
