@@ -2,6 +2,9 @@
 
 const Database = require("./database");
 
+let createStatementFile = "./Vagapova_Valeriia_product_createStatements.json";
+let adminPass = "adminpass";
+
 const printMessage = (message) => console.log(message);
 const printStatement = (statement) => printMessage(statement + ";");
 const printError = (message) =>
@@ -10,9 +13,6 @@ const printError = (message) =>
       `\t${message}\n` +
       `${"#".repeat(47)}`
   );
-
-let createStatementFile = "./computerCreateStatements.json";
-let adminPass = "adminpass";
 
 if (process.argv.length > 2) {
   adminPass = process.argv[2];
@@ -27,28 +27,16 @@ try {
   printError(err.message);
 }
 
-/*   const options = {
-      host: createStatements.host,
-      port: createStatements.port,
-      user: createStatements.admin,
-      password: createStatements.adminPass,
-      socketPath: createStatements.socketPath,
-      allowPublicKeyRetrieval: createStatements.allowPublicKeyRetrieval,
-  }; */
-
 async function createDb(createStatements, adminPass) {
   const options = {
     host: createStatements.host,
     port: createStatements.port,
     user: createStatements.admin,
-    password: createStatements.adminPassword,
-    socketPath: createStatements.socketPath,
-    allowPublicKeyRetrieval: createStatements.allowPublicKeyRetrieval,
+    password: adminPass,
   };
   const DEBUG = createStatements.debug;
   const db = new Database(options);
 
-  // 'jane'@'localhost'
   const user = `'${createStatements.user}'@'${createStatements.host}'`;
   const dropDatabaseSql = `drop database if exists ${createStatements.database}`;
   const createDatabaseSql = `create database ${createStatements.database}`;
@@ -56,15 +44,10 @@ async function createDb(createStatements, adminPass) {
   const createUserSql = `create user if not exists ${user} identified by '${createStatements.userPassword}'`;
   const grantPrivilegesSql = `grant all privileges on ${createStatements.database}.* to ${user}`;
 
-  console.log(dropDatabaseSql);
-  console.log(createDatabaseSql);
-  console.log(createStatements.dropUser);
-  console.log(dropUserSql);
-  console.log(createUserSql);
-  console.log(grantPrivilegesSql);
-
   try {
+    console.log("before first query");
     await db.doQuery(dropDatabaseSql);
+    console.log("first query done");
     if (DEBUG) printStatement(dropDatabaseSql);
     await db.doQuery(createDatabaseSql);
     if (DEBUG) printStatement(createDatabaseSql);

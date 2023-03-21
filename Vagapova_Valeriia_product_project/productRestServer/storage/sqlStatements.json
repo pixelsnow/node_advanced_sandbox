@@ -1,0 +1,17 @@
+{
+  "getAll": ["select productId, name, model, type, price from products"],
+  "get": [
+    "select productId, name, model, type, price from products where productId=?"
+  ],
+  "insert": [
+    "insert into products (productId, name, model, type, price)",
+    "values(?, ?, ?, ?, ?)"
+  ],
+  "update": [
+    "update products set name=?, model=?, type=?, price=?",
+    "where productId=?"
+  ],
+  "remove": ["delete from products where productId=?"],
+  "primaryKey": "productId",
+  "resourse": "products"
+}

@@ -1,0 +1,26 @@
+{
+  "host": "localhost",
+  "port": 3306,
+  "admin": "admin",
+  "user": "isla",
+  "userPassword": "SDVjbSjj",
+  "dropUser": true,
+  "debug": true,
+  "database": "productDB",
+  "tables": [
+    {
+      "tableName": "products",
+      "columns": [
+        "productId integer not null primary key",
+        "name varchar(17) not null",
+        "model integer not null",
+        "type varchar(18) not null",
+        "price integer not null"
+      ],
+      "data": [
+        [1, "NexGen 2", "1995", "toaster", 700],
+        [2, "Mercury", "2015", "radio", 300]
+      ]
+    }
+  ]
+}
