@@ -47,9 +47,7 @@ async function createDb(createStatements, adminPass) {
   const grantPrivilegesSql = `grant all privileges on ${createStatements.database}.* to ${user}`;
 
   try {
-    console.log("before first query");
     await db.doQuery(dropDatabaseSql);
-    console.log("first query done");
     if (DEBUG) printStatement(dropDatabaseSql);
     await db.doQuery(createDatabaseSql);
     if (DEBUG) printStatement(createDatabaseSql);

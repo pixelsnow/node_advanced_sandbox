@@ -16,7 +16,6 @@
   }
 
   async function send() {
-    console.log("click");
     clearMessage();
     const product = {
       productId: +productIdField.value,

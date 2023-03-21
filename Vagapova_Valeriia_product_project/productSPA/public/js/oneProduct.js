@@ -28,9 +28,7 @@
         }
         updateResult(result);
       }
-      console.log(result);
     } catch (err) {
-      console.log(err);
       updateMessage(`Product not found. ${err.message}`, "error");
     }
   }

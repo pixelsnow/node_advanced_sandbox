@@ -30,16 +30,11 @@ module.exports = class DataStorage {
   }
 
   getAll() {
-    console.log("enter getAll");
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("trying getAll");
-        console.log(getAllSql);
         const result = await this.db.doQuery(getAllSql);
-        console.log("result", result);
         resolve(result.queryResult);
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });
@@ -63,7 +58,6 @@ module.exports = class DataStorage {
   insert(resourceObject) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(resourceObject);
         await this.db.doQuery(insertSql, toInsertArray(resourceObject));
         resolve(MESSAGES.INSERT_OK(PRIMARY_KEY, resourceObject[PRIMARY_KEY]));
       } catch (err) {
@@ -114,7 +108,6 @@ module.exports = class DataStorage {
           resolve(MESSAGES.REMOVE_OK(PRIMARY_KEY, key));
         }
       } catch (err) {
-        console.log(err);
         reject(MESSAGES.PROGRAM_ERROR());
       }
     });

@@ -24,12 +24,10 @@
         options
       );
       const status = await result.json();
-      console.log(status);
       if (status.message) {
         updateMessage(status.message, status.type);
       }
     } catch (err) {
-      console.log(err);
       updateMessage(
         `Product with productId ${id} was not deleted. ${err.message}`,
         "error"
