@@ -27,15 +27,6 @@ try {
   printError(err.message);
 }
 
-/*   const options = {
-      host: createStatements.host,
-      port: createStatements.port,
-      user: createStatements.admin,
-      password: createStatements.adminPass,
-      socketPath: createStatements.socketPath,
-      allowPublicKeyRetrieval: createStatements.allowPublicKeyRetrieval,
-  }; */
-
 async function createDb(createStatements, adminPass) {
   const options = {
     host: createStatements.host,
