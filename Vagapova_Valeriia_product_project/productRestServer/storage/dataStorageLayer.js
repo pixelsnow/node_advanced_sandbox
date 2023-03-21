@@ -63,6 +63,7 @@ module.exports = class DataStorage {
   insert(resourceObject) {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(resourceObject);
         await this.db.doQuery(insertSql, toInsertArray(resourceObject));
         resolve(MESSAGES.INSERT_OK(PRIMARY_KEY, resourceObject[PRIMARY_KEY]));
       } catch (err) {

@@ -16,6 +16,7 @@
   }
 
   async function send() {
+    console.log("click");
     clearMessage();
     const product = {
       productId: +productIdField.value,
@@ -33,7 +34,7 @@
         },
         mode: "cors",
       };
-      const data = await fetch(`http://localhost:4000/api/computers/`, options);
+      const data = await fetch(`http://localhost:4000/api/products`, options);
       const status = await data.json();
       if (status.message) {
         updateMessage(status.message, status.type);
